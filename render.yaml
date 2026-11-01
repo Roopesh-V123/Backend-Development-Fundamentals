@@ -1,11 +1,11 @@
 services:
   - type: web
-    name: bdf-lab-01-express
-    env: node
+    name: roopesh-lab-01
+    runtime: node
     plan: free
     rootDir: lab-01
     buildCommand: npm install
     startCommand: npm start
     envVars:
-      - key: NODE_ENV
-        value: production
+      - key: PORT
+        value: 10000

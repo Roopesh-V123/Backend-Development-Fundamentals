@@ -2,7 +2,7 @@
 
 Name: Vankadari Roopesh · Registration number: 252U1R1249 · Section: Learning Group 7
 
-Live link: https://roopesh-bdf-lab01.loca.lt
+Live link: https://roopesh-lab-01.onrender.com/
 GitHub Repository: https://github.com/Roopesh-V123/Backend-Development-Fundamentals
 
 ---
