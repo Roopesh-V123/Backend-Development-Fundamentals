@@ -1,0 +1,23 @@
+{
+  "name": "lab-01",
+  "version": "1.0.0",
+  "description": "Lab 1 - Node.js and Express server for Backend Development Fundamentals",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:http": "node server-http.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "backend",
+    "http"
+  ],
+  "author": "Vankadari Roopesh",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
