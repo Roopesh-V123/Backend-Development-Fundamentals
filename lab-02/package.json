@@ -1,0 +1,29 @@
+{
+  "name": "lab-02",
+  "version": "1.0.0",
+  "description": "Lab 2 - SQLite database and CRUD routes for Backend Development Fundamentals",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "dev": "nodemon server.js",
+    "node": "node server.js",
+    "init-db": "node setupDb.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "sqlite",
+    "sqlite3",
+    "crud",
+    "rest-api"
+  ],
+  "author": "Vankadari Roopesh",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0",
+    "nodemon": "^3.1.14",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1"
+  }
+}
