@@ -2,7 +2,8 @@
 
 Name: Vankadari Roopesh · Registration number: 252U1R1249 · Section: Learning Group 7
 
-Live link: [Pending deployment]
+Live link: https://great-times-dress.loca.lt
+GitHub Repository: https://github.com/Roopesh-V123/Backend-Development-Fundamentals
 
 ---
 
