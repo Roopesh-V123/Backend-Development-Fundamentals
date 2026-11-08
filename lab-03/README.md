@@ -1,6 +1,6 @@
 # Lab 3: REST API, Query Parameters, Validation, and Debugging
 
-> **🔗 Live Deployment URL:** [https://roopesh-lab-03.onrender.com](https://roopesh-lab-03.onrender.com) *(or [https://roopesh-lab-02.onrender.com](https://roopesh-lab-02.onrender.com) if reusing your existing Render web service)*
+> **🔗 Live Deployment URL:** [https://roopesh-lab-03.onrender.com](https://roopesh-lab-03.onrender.com)
 
 ---
 
