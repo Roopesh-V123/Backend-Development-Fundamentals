@@ -1,6 +1,6 @@
 # Lab 3: REST API, Query Parameters, Validation, and Debugging
 
-> **🔗 Live Deployment URL:** [YOUR_RENDER_DEPLOYMENT_URL_HERE](https://your-deployment-url-here.onrender.com) *(Placeholder - Update after deployment)*
+> **🔗 Live Deployment URL:** [https://roopesh-lab-03.onrender.com](https://roopesh-lab-03.onrender.com) *(or [https://roopesh-lab-02.onrender.com](https://roopesh-lab-02.onrender.com) if reusing your existing Render web service)*
 
 ---
 
@@ -132,15 +132,15 @@ npm run init-db
 
 ## 📡 API Endpoints
 
-| Method | Path | Endpoint / Test Target | Description | Status Code |
+| Method | Path | Live URL | Description | Status Code |
 |:---|:---|:---|:---|:---|
-| `GET` | `/` | `http://localhost:3000/` | API Directory, student info & system status | `200 OK` |
-| `GET` | `/books/` | `http://localhost:3000/books/` | Retrieve books with default pagination (limit=10) | `200 OK` / `400 Bad Request` |
-| `GET` | `/books/:id` | `http://localhost:3000/books/1` | Retrieve a single book by ID | `200 OK` / `400 Bad Request` / `404 Not Found` |
-| `POST` | `/books/` | `http://localhost:3000/books/` | Create and insert a new book record | `201 Created` / `400 Bad Request` |
-| `PUT` | `/books/:id` | `http://localhost:3000/books/1` | Update details of an existing book by ID | `200 OK` / `400 Bad Request` / `404 Not Found` |
-| `DELETE` | `/books/:id` | `http://localhost:3000/books/15` | Delete a book record by ID | `200 OK` / `400 Bad Request` / `404 Not Found` |
-| `GET` | `/books/999` | `http://localhost:3000/books/999` | Test 404 response for non-existent record | `404 Not Found` |
+| `GET` | `/` | [Open Live Link](https://roopesh-lab-03.onrender.com/) | API Directory, student info & system status | `200 OK` |
+| `GET` | `/books/` | [Open Live Link](https://roopesh-lab-03.onrender.com/books/) | Retrieve books with default pagination (limit=10) | `200 OK` / `400 Bad Request` |
+| `GET` | `/books/:id` | [Open Live Link (ID 1)](https://roopesh-lab-03.onrender.com/books/1) | Retrieve a single book by ID | `200 OK` / `400 Bad Request` / `404 Not Found` |
+| `POST` | `/books/` | [API Endpoint](https://roopesh-lab-03.onrender.com/books/) | Create and insert a new book record | `201 Created` / `400 Bad Request` |
+| `PUT` | `/books/:id` | [API Endpoint (ID 1)](https://roopesh-lab-03.onrender.com/books/1) | Update details of an existing book by ID | `200 OK` / `400 Bad Request` / `404 Not Found` |
+| `DELETE` | `/books/:id` | [API Endpoint (ID 15)](https://roopesh-lab-03.onrender.com/books/15) | Delete a book record by ID | `200 OK` / `400 Bad Request` / `404 Not Found` |
+| `GET` | `/books/999` | [Open Live Link (404 Test)](https://roopesh-lab-03.onrender.com/books/999) | Test 404 response for non-existent record | `404 Not Found` |
 
 ---
 
@@ -148,18 +148,18 @@ npm run init-db
 
 All query parameters are optional and have built-in default values. They can be utilized individually or combined:
 
-| Parameter | Type | Default | Allowed Values / Constraints | Example Test URL | Description |
-|-----------|------|---------|------------------------------|------------------|-------------|
-| `search_q` | String | `""` | Any search text | `/books/?search_q=JavaScript` | Case-insensitive title search via `LIKE '%term%'` |
-| `order_by` | String | `"id"` | `id`, `title`, `author`, `price`, `pages` | `/books/?order_by=price&order=DESC` | Whitelisted column name to order results by |
-| `order` | String | `"ASC"` | `ASC`, `DESC` (case-insensitive) | `/books/?order=DESC` | Sort direction (ascending or descending) |
-| `limit` | Integer | `10` | Non-negative integer (`>= 0`) | `/books/?limit=3&offset=3` | Maximum number of book records to return |
-| `offset` | Integer | `0` | Non-negative integer (`>= 0`) | `/books/?limit=3&offset=3` | Number of book records to skip (for pagination) |
-| `min_price` | Number | None | Non-negative number (`>= 0`) | `/books/?min_price=400&max_price=800` | Lower bound price filter (`price >= min_price`) |
-| `max_price` | Number | None | Non-negative number (`>= 0`) | `/books/?min_price=400&max_price=800` | Upper bound price filter (`price <= max_price`) |
+| Parameter | Type | Default | Allowed Values / Constraints | Live Test URL | Description |
+|-----------|------|---------|------------------------------|---------------|-------------|
+| `search_q` | String | `""` | Any search text | [Test search_q=JavaScript](https://roopesh-lab-03.onrender.com/books/?search_q=JavaScript) | Case-insensitive title search via `LIKE '%term%'` |
+| `order_by` | String | `"id"` | `id`, `title`, `author`, `price`, `pages` | [Test order_by=price](https://roopesh-lab-03.onrender.com/books/?order_by=price&order=DESC) | Whitelisted column name to order results by |
+| `order` | String | `"ASC"` | `ASC`, `DESC` (case-insensitive) | [Test order=DESC](https://roopesh-lab-03.onrender.com/books/?order_by=price&order=DESC) | Sort direction (ascending or descending) |
+| `limit` | Integer | `10` | Non-negative integer (`>= 0`) | [Test limit=3&offset=3](https://roopesh-lab-03.onrender.com/books/?limit=3&offset=3) | Maximum number of book records to return |
+| `offset` | Integer | `0` | Non-negative integer (`>= 0`) | [Test limit=3&offset=3](https://roopesh-lab-03.onrender.com/books/?limit=3&offset=3) | Number of book records to skip (for pagination) |
+| `min_price` | Number | None | Non-negative number (`>= 0`) | [Test min_price=400&max_price=800](https://roopesh-lab-03.onrender.com/books/?min_price=400&max_price=800) | Lower bound price filter (`price >= min_price`) |
+| `max_price` | Number | None | Non-negative number (`>= 0`) | [Test min_price=400&max_price=800](https://roopesh-lab-03.onrender.com/books/?min_price=400&max_price=800) | Upper bound price filter (`price <= max_price`) |
 
 ### Combined Filter Example
-- **URL:** `http://localhost:3000/books/?search_q=the&min_price=200&max_price=900&order_by=price&order=DESC&limit=4&offset=0`
+- **URL:** [https://roopesh-lab-03.onrender.com/books/?search_q=the&min_price=200&max_price=900&order_by=price&order=DESC&limit=4&offset=0](https://roopesh-lab-03.onrender.com/books/?search_q=the&min_price=200&max_price=900&order_by=price&order=DESC&limit=4&offset=0)
 - **Filters Applied:** Searches for `"the"`, filters price between `200` and `900`, sorts by `price DESC`, and limits to `4` records.
 
 ---
@@ -402,32 +402,37 @@ SELECT id, title FROM book WHERE id = 15;
 > *Placeholders: Save corresponding screenshots in `lab-03/screenshots/` and preview below.*
 
 ### 1. GET All Books Default (GET /books/)
+- **Render Live URL:** [https://roopesh-lab-03.onrender.com/books/](https://roopesh-lab-03.onrender.com/books/)
 - **Expected HTTP Status:** `200 OK`
 
 ![GET All Books Default](screenshots/01-get-all-books-default.png)
 
 ### 2. Search Query Parameter (GET /books/?search_q=JavaScript)
+- **Render Live URL:** [https://roopesh-lab-03.onrender.com/books/?search_q=JavaScript](https://roopesh-lab-03.onrender.com/books/?search_q=JavaScript)
 - **Expected HTTP Status:** `200 OK`
 
 ![Search Query](screenshots/02-search-query.png)
 
 ### 3. Sorting by Price Descending (GET /books/?order_by=price&order=DESC)
+- **Render Live URL:** [https://roopesh-lab-03.onrender.com/books/?order_by=price&order=DESC](https://roopesh-lab-03.onrender.com/books/?order_by=price&order=DESC)
 - **Expected HTTP Status:** `200 OK`
 
 ![Sorting by Price Descending](screenshots/03-sorting.png)
 
 ### 4. Pagination (GET /books/?limit=3&offset=3)
+- **Render Live URL:** [https://roopesh-lab-03.onrender.com/books/?limit=3&offset=3](https://roopesh-lab-03.onrender.com/books/?limit=3&offset=3)
 - **Expected HTTP Status:** `200 OK`
 
 ![Pagination](screenshots/04-pagination.png)
 
 ### 5. Price Range Filter (GET /books/?min_price=400&max_price=800)
+- **Render Live URL:** [https://roopesh-lab-03.onrender.com/books/?min_price=400&max_price=800](https://roopesh-lab-03.onrender.com/books/?min_price=400&max_price=800)
 - **Expected HTTP Status:** `200 OK`
 
 ![Price Range Filter](screenshots/05-price-filter.png)
 
 ### 6. Combined Query Filters
-- **URL:** `/books/?search_q=the&min_price=200&max_price=900&order_by=price&order=DESC&limit=4&offset=0`
+- **Render Live URL:** [https://roopesh-lab-03.onrender.com/books/?search_q=the&min_price=200&max_price=900&order_by=price&order=DESC&limit=4&offset=0](https://roopesh-lab-03.onrender.com/books/?search_q=the&min_price=200&max_price=900&order_by=price&order=DESC&limit=4&offset=0)
 - **Expected HTTP Status:** `200 OK`
 
 ![Combined Filters](screenshots/06-combined-filters.png)
@@ -453,6 +458,7 @@ SELECT id, title FROM book WHERE id = 15;
 ![DELETE Book](screenshots/10-delete-book.png)
 
 ### 11. 404 Not Found for Non-Existent ID
+- **Render Live URL:** [https://roopesh-lab-03.onrender.com/books/999](https://roopesh-lab-03.onrender.com/books/999)
 - **Expected HTTP Status:** `404 Not Found`
 
 ![404 Not Found](screenshots/11-404-not-found.png)
@@ -487,31 +493,37 @@ In a monorepo containing multiple labs (`lab-01/`, `lab-02/`, `lab-03/`), Render
 1. **Open Render Dashboard:**
    Go to [dashboard.render.com](https://dashboard.render.com/).
 
-2. **Update Service Settings or Create New Web Service:**
-   - **If creating a new service for Lab 3:**
-     1. Click **"New +"** → **"Web Service"**.
-     2. Connect your repository.
-     3. Fill in the configuration:
+2. **Option A: Reuse Existing Web Service (`roopesh-lab-02`)**
+   - Click your existing service (`roopesh-lab-02`).
+   - Click **Settings** in the left menu.
+   - Scroll down to **Root Directory** and change it from `lab-02` to `lab-03`.
+   - Click **Save Changes**.
+   - Click **Manual Deploy** (top right) → **Deploy latest commit**.
+
+3. **Option B: Create a Dedicated Web Service for Lab 3 (`roopesh-lab-03`)**
+   - Click **"New +"** → **"Web Service"**.
+   - Connect repository: `Roopesh-V123/Backend-Development-Fundamentals`.
+   - Configure the following settings:
 
    | Setting | Value |
    |---------|-------|
-   | **Name** | `vankadari-roopesh-lab03` |
+   | **Name** | `roopesh-lab-03` |
    | **Root Directory** | `lab-03` |
    | **Runtime** | `Node` |
    | **Build Command** | `npm install` |
    | **Start Command** | `npm start` |
    | **Environment Variable** | `NODE_VERSION: 20.18.0` |
 
-3. **Verify by visiting the deployed Render URLs:**
-   - **Main Server / Student Info:** `https://<your-render-subdomain>.onrender.com/`
-   - **GET All Books (Default):** `https://<your-render-subdomain>.onrender.com/books/`
-   - **GET Search Title (`search_q=JavaScript`):** `https://<your-render-subdomain>.onrender.com/books/?search_q=JavaScript`
-   - **GET Sort by Price:** `https://<your-render-subdomain>.onrender.com/books/?order_by=price&order=DESC`
-   - **GET Pagination:** `https://<your-render-subdomain>.onrender.com/books/?limit=3&offset=3`
-   - **GET Price Filter:** `https://<your-render-subdomain>.onrender.com/books/?min_price=400&max_price=800`
-   - **GET Combined Filters:** `https://<your-render-subdomain>.onrender.com/books/?search_q=the&min_price=200&max_price=900&order_by=price&order=DESC&limit=4&offset=0`
-   - **GET Single Book (ID 1):** `https://<your-render-subdomain>.onrender.com/books/1`
-   - **GET 404 Error Test (ID 999):** `https://<your-render-subdomain>.onrender.com/books/999`
+4. **Verify by visiting the deployed Render URLs:**
+   - **Main Server / Student Info:** [https://roopesh-lab-03.onrender.com/](https://roopesh-lab-03.onrender.com/)
+   - **GET All Books (Default):** [https://roopesh-lab-03.onrender.com/books/](https://roopesh-lab-03.onrender.com/books/)
+   - **GET Search Title (`search_q=JavaScript`):** [https://roopesh-lab-03.onrender.com/books/?search_q=JavaScript](https://roopesh-lab-03.onrender.com/books/?search_q=JavaScript) *(Returns only the 2 JavaScript books)*
+   - **GET Sort by Price:** [https://roopesh-lab-03.onrender.com/books/?order_by=price&order=DESC](https://roopesh-lab-03.onrender.com/books/?order_by=price&order=DESC)
+   - **GET Pagination:** [https://roopesh-lab-03.onrender.com/books/?limit=3&offset=3](https://roopesh-lab-03.onrender.com/books/?limit=3&offset=3)
+   - **GET Price Filter:** [https://roopesh-lab-03.onrender.com/books/?min_price=400&max_price=800](https://roopesh-lab-03.onrender.com/books/?min_price=400&max_price=800)
+   - **GET Combined Filters:** [https://roopesh-lab-03.onrender.com/books/?search_q=the&min_price=200&max_price=900&order_by=price&order=DESC&limit=4&offset=0](https://roopesh-lab-03.onrender.com/books/?search_q=the&min_price=200&max_price=900&order_by=price&order=DESC&limit=4&offset=0)
+   - **GET Single Book (ID 1):** [https://roopesh-lab-03.onrender.com/books/1](https://roopesh-lab-03.onrender.com/books/1)
+   - **GET 404 Error Test (ID 999):** [https://roopesh-lab-03.onrender.com/books/999](https://roopesh-lab-03.onrender.com/books/999)
 
 ---
 
@@ -563,4 +575,3 @@ In this lab, I learned:
 ## 👤 Author
 
 **Vankadari Roopesh** – 252U1R1249 – CSE - 2E - 211
-
