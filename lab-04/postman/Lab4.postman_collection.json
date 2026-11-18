@@ -1,0 +1,473 @@
+﻿{
+  "info": {
+    "_postman_id": "bdf-lab-04-auth-jwt-collection",
+    "name": "Lab 4 - Registration, Login and JWT (Reddemoni roopesh - 252U1R1220)",
+    "description": "Comprehensive Postman test suite for Lab 4: Authentication with bcrypt password hashing and JWT token authorization.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01. Root - Student Info & API Directory",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "02. Register - Success (201 Created)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"student_{{$timestamp}}\",\n  \"name\": \"Reddemoni roopesh\",\n  \"password\": \"secret123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/register/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "register",
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201 Created\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "03. Register - Error: User Already Exists (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"roopesh\",\n  \"name\": \"Reddemoni roopesh\",\n  \"password\": \"secret123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/register/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "register",
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400 Bad Request (Duplicate User)\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "04. Register - Error: Missing Required Fields (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"incomplete_user\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/register/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "register",
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400 Bad Request (Missing Fields)\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "05. Register - Error: Password Too Short (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"short_pwd_user\",\n  \"name\": \"Short User\",\n  \"password\": \"123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/register/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "register",
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400 Bad Request (Password Too Short)\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "06. Login - Success (200 OK + jwt_token)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"roopesh\",\n  \"password\": \"secret123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/login/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "login",
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 OK with jwt_token\", function () {",
+              "    pm.response.to.have.status(200);",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('jwt_token');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "07. Login - Error: Invalid User (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"non_existent_user\",\n  \"password\": \"secret123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/login/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "login",
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400 Bad Request (Unknown User)\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "08. Login - Error: Invalid Password (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"roopesh\",\n  \"password\": \"WrongPassword!\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/login/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "login",
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400 Bad Request (Wrong Password)\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "09. Login - Error: Missing Password (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"roopesh\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/login/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "login",
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400 Bad Request (Missing Password)\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "10. Books - GET /books/ (200 OK)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/books/?limit=3&offset=0",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "books",
+            ""
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "3"
+            },
+            {
+              "key": "offset",
+              "value": "0"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 OK (List Books)\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "11. Books - GET /books/:bookId/ (200 OK)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/books/1/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "books",
+            "1",
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 OK (Get Book by ID)\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "12. 404 Route Not Found",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/unknown-route-test/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "unknown-route-test",
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404 Not Found\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://r-roopesh-4.onrender.com",
+      "type": "string"
+    }
+  ]
+}

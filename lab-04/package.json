@@ -1,0 +1,35 @@
+{
+  "name": "lab-04",
+  "version": "1.0.0",
+  "description": "Lab 4 - Registration, Login and JWT Authentication for Backend Development Fundamentals",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "dev": "nodemon server.js",
+    "node": "node server.js",
+    "init-db": "node setupDb.js",
+    "test": "node test-api.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "sqlite",
+    "sqlite3",
+    "bcrypt",
+    "jsonwebtoken",
+    "jwt",
+    "authentication",
+    "rest-api"
+  ],
+  "author": "Vankadari Roopesh",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.4",
+    "sqlite": "^5.1.1",
+    "sqlite3": "5.1.7"
+  }
+}
